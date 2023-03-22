@@ -3,23 +3,24 @@ import { useEffect, useState } from "react";
 
 export interface User {
   [x: string]: any;
-  id:string;
-  name:string;
-  email:string,
-  title:string,
-  orgnization:string
+  id: string;
+  name: string;
+  email: string;
+  title: string;
+  orgnization: string;
+  token: string;
 }
 
 interface SearchPannelProps {
-  users:User[],
-  param:{
-    name:string,
-    personId:string
-  },
-  setParam: (param:SearchPannelProps['param']) => void;
+  users: User[];
+  param: {
+    name: string;
+    personId: string;
+  };
+  setParam: (param: SearchPannelProps["param"]) => void;
 }
 
-export const SearchPannel = ({ users, param, setParam }:SearchPannelProps) => {
+export const SearchPannel = ({ users, param, setParam }: SearchPannelProps) => {
   return (
     <form action="">
       {/* setParam(Object.assign({},param,{name:evt.target.value})) */}
