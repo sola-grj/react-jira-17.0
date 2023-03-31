@@ -13,7 +13,7 @@ import { useDocumentTitle } from "utils";
 export const UnauthencatedApp = () => {
   const [isRegister, setRegister] = useState(false);
   const [error, setError] = useState<Error | null>(null);
-  // useDocumentTitle("请登录或注册以继续");
+  useDocumentTitle("请登录或注册以继续");
   return (
     <Container>
       {/* <Helmet>
@@ -21,13 +21,13 @@ export const UnauthencatedApp = () => {
       </Helmet> */}
       <Header />
       <BackGround />
-      <Button
+      {/* <Button
         onClick={() => {
           throw new Error("点击抛出一个异常");
         }}
       >
         抛出异常
-      </Button>
+      </Button> */}
       <ShadowCard>
         <Title>{isRegister ? "请注册" : "请登录"}</Title>
         {error ? (

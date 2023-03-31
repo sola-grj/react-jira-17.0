@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 
 export const isFalsy = (value: unknown) => (value === 0 ? false : !value);
 export const isVoid = (value: unknown) =>
@@ -53,15 +53,18 @@ export const useDocumentTitle = (
   title: string,
   keepOnUnmount: boolean = true
 ) => {
-  const oldTitle = document.title;
+  const oldTitle = useRef(document.title).current;
+  // 页面加载时：oldTitle === 旧的title React App
+  // 加载后： oldTitle === 新title
   useEffect(() => {
     document.title = title;
   }, [title]);
   useEffect(() => {
     return () => {
       if (!keepOnUnmount) {
+        // 此时hook与闭包的原因，导致此时作用域中的oldTitle始终是React App
         document.title = oldTitle;
       }
     };
-  }, []);
+  }, [keepOnUnmount, oldTitle]);
 };
