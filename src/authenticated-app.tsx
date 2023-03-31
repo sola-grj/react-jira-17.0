@@ -22,7 +22,7 @@ export const AuthenticatedApp = () => {
   const value: any = undefined;
   return (
     <Container>
-      {value.notExist}
+      {/* {value.notExist} */}
       <Header between={true}>
         <HeaderLeft gap={true}>
           <SoftWareLogo width={"18rem"} color={"rgb(38,132,255)"} />
