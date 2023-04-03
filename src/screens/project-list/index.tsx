@@ -12,14 +12,13 @@ import { Project } from "screens/project-list/list";
 import { useProject } from "utils/project";
 import { useUsers } from "utils/user";
 import { Helmet } from "react-helmet";
+import { useUrlQueryParam } from "utils/url";
 
 const apiUrl = process.env.REACT_APP_API_URL;
 
 export const ProjectListScreen = () => {
-  const [param, setParam] = useState({
-    name: "",
-    personId: "",
-  });
+  const [keys] = useState<("name" | "personId")[]>(["name", "personId"]);
+  const [param, setParam] = useUrlQueryParam(keys);
   const debounceParam = useDebounce(param, 200);
   // const [list, setList] = useState([]);
   const { isLoading, error, data: list } = useProject(debounceParam);
@@ -41,6 +40,8 @@ export const ProjectListScreen = () => {
     </Container>
   );
 };
+
+ProjectListScreen.whyDidYouRender = false;
 
 const Container = styled.div`
   padding: 3.2rem;
