@@ -5,11 +5,11 @@ import React from "react";
 import { Link } from "react-router-dom";
 import { User } from "./search-pannel";
 export interface Project {
-  id: String;
-  name: String;
-  personId: String;
-  pin: String;
-  organization: String;
+  id: number;
+  name: string;
+  personId: number;
+  pin: string;
+  organization: string;
   created: number;
 }
 interface ListProps extends TableProps<Project> {
@@ -40,9 +40,8 @@ export const List = ({ users, ...props }: ListProps) => {
           render(value, project) {
             return (
               <span>
-                {users.find(
-                  (user: { id: String }) => user.id === project.personId
-                )?.name || "未知"}
+                {users.find((user) => user.id === Number(project.personId))
+                  ?.name || "未知"}
               </span>
             );
           },
