@@ -1,26 +1,45 @@
 import { Table, TableProps } from "antd";
+import { Pin } from "component/pin";
 import dayjs from "dayjs";
 import { title } from "process";
 import React from "react";
 import { Link } from "react-router-dom";
+import { useEditProject } from "utils/project";
 import { User } from "./search-pannel";
 export interface Project {
   id: number;
   name: string;
   personId: number;
-  pin: string;
+  pin: boolean;
   organization: string;
   created: number;
 }
 interface ListProps extends TableProps<Project> {
   // list: Project[];
   users: User[];
+  refresh?: () => void;
 }
 export const List = ({ users, ...props }: ListProps) => {
+  const { mutate } = useEditProject();
+  // 函数式编程之 柯里化 优先知道了id，后续传入才知道的pin参数
+  const pinProject = (id: number) => (pin: boolean) =>
+    mutate({ id, pin }).then(props.refresh);
+
   return (
     <Table
       pagination={false}
       columns={[
+        {
+          title: <Pin checked={true} disabled={true} />,
+          render(value, project) {
+            return (
+              <Pin
+                checked={project.pin}
+                onCheckedChange={pinProject(project.id)}
+              />
+            );
+          },
+        },
         {
           title: "名称",
           dataIndex: "name",
