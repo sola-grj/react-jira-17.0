@@ -1,5 +1,6 @@
 import { stat } from "fs";
 import { useState } from "react";
+import { useMountedRef } from "utils";
 
 interface State<D> {
   error: Error | null;
@@ -26,6 +27,7 @@ export const useAsync = <D>(
     ...defaultInitialState,
     ...initialState,
   });
+  const mountedRef = useMountedRef();
   // useState直接穿入函数的意义时：惰性初始化；所以要用useState保存函数，不能直接传入函数
   const [retry, setRetry] = useState(() => () => {});
   const setData = (data: D) =>
@@ -58,7 +60,11 @@ export const useAsync = <D>(
     });
     return promise
       .then((data) => {
-        setData(data);
+        console.log(mountedRef.current, "----------");
+
+        if (mountedRef.current) {
+          setData(data);
+        }
         return data;
       })
       .catch((error) => {
