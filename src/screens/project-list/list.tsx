@@ -4,8 +4,10 @@ import { Pin } from "component/pin";
 import dayjs from "dayjs";
 import { title } from "process";
 import React from "react";
+import { useDispatch } from "react-redux";
 import { Link } from "react-router-dom";
 import { useEditProject } from "utils/project";
+import { ProjectListActions } from "./project-list-slice";
 import { User } from "./search-pannel";
 export interface Project {
   id: number;
@@ -22,13 +24,21 @@ interface ListProps extends TableProps<Project> {
   projectButton: JSX.Element;
 }
 export const List = ({ users, ...props }: ListProps) => {
+  const dispatch = useDispatch();
   const { mutate } = useEditProject();
   // 函数式编程之 柯里化 优先知道了id，后续传入才知道的pin参数
   const pinProject = (id: number) => (pin: boolean) =>
     mutate({ id, pin }).then(props.refresh);
   const items = [
     {
-      label: props.projectButton,
+      label: (
+        <ButtonNoPadding
+          type="link"
+          onClick={() => dispatch(ProjectListActions.openProjectModal())}
+        >
+          编辑
+        </ButtonNoPadding>
+      ),
       key: "item-1",
     }, // 菜单项务必填写 key
   ];

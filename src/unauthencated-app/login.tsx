@@ -3,6 +3,7 @@ import React, { FormEvent } from "react";
 import { Button, Form, Input } from "antd";
 import { LongButton } from "unauthencated-app";
 import { useAsync } from "utils/use-async";
+import { useDispatch } from "react-redux";
 
 const apiUrl = process.env.REACT_APP_API_URL;
 
@@ -24,6 +25,7 @@ export const LoginScreen = ({
     });
   };
   const { run, isLoading } = useAsync(undefined, { throwOnError: true });
+  const dispatch = useDispatch();
   //   const login = (param: { username: string; password: string }) => {
   //     // requestFunc()
   //     fetch(`${apiUrl}/login`, {

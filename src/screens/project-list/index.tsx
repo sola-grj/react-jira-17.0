@@ -32,7 +32,6 @@ export const ProjectListScreen = (props: { projectButton: JSX.Element }) => {
     retry,
   } = useProject(useDebounce(param, 200));
   const { data: users } = useUsers();
-
   return (
     <Container>
       <Row between={true}>
