@@ -18,9 +18,7 @@ import { Row } from "component/lib";
 
 const apiUrl = process.env.REACT_APP_API_URL;
 
-export const ProjectListScreen = (props: {
-  setProjectModalOpen: (isOpen: boolean) => void;
-}) => {
+export const ProjectListScreen = (props: { projectButton: JSX.Element }) => {
   useDocumentTitle("项目列表", false);
   // 基本类型，可以放到依赖里面，组件状态，可以放到依赖里面，非组件状态，绝对不能放在依赖里面
   // const [param, setParam] = useProjectsSearchParams();
@@ -39,9 +37,7 @@ export const ProjectListScreen = (props: {
     <Container>
       <Row between={true}>
         <h1>项目列表</h1>
-        <Button onClick={() => props.setProjectModalOpen(true)}>
-          创建项目
-        </Button>
+        {props.projectButton}
       </Row>
 
       {/* 方案一 react-helmet */}
@@ -53,7 +49,7 @@ export const ProjectListScreen = (props: {
         <Typography.Text type="danger">{error.message}</Typography.Text>
       ) : null}
       <List
-        setProjectModalOpen={props.setProjectModalOpen}
+        projectButton={props.projectButton}
         refresh={retry}
         users={users || []}
         loading={isLoading}

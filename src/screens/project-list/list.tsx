@@ -19,7 +19,7 @@ interface ListProps extends TableProps<Project> {
   // list: Project[];
   users: User[];
   refresh?: () => void;
-  setProjectModalOpen: (isOpen: boolean) => void;
+  projectButton: JSX.Element;
 }
 export const List = ({ users, ...props }: ListProps) => {
   const { mutate } = useEditProject();
@@ -28,7 +28,7 @@ export const List = ({ users, ...props }: ListProps) => {
     mutate({ id, pin }).then(props.refresh);
   const items = [
     {
-      label: <div onClick={(e) => props.setProjectModalOpen(true)}>edit</div>,
+      label: props.projectButton,
       key: "item-1",
     }, // 菜单项务必填写 key
   ];
