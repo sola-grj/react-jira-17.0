@@ -7,6 +7,7 @@ import React from "react";
 import { Link } from "react-router-dom";
 import { useEditProject } from "utils/project";
 import { User } from "./search-pannel";
+import { useProjectModal } from "./util";
 export interface Project {
   id: number;
   name: string;
@@ -22,13 +23,18 @@ interface ListProps extends TableProps<Project> {
   projectButton: JSX.Element;
 }
 export const List = ({ users, ...props }: ListProps) => {
+  const { open } = useProjectModal();
   const { mutate } = useEditProject();
   // 函数式编程之 柯里化 优先知道了id，后续传入才知道的pin参数
   const pinProject = (id: number) => (pin: boolean) =>
     mutate({ id, pin }).then(props.refresh);
   const items = [
     {
-      label: props.projectButton,
+      label: (
+        <ButtonNoPadding type="link" onClick={open}>
+          创建项目
+        </ButtonNoPadding>
+      ),
       key: "item-1",
     }, // 菜单项务必填写 key
   ];

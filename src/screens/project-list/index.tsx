@@ -13,12 +13,13 @@ import { useProject } from "utils/project";
 import { useUsers } from "utils/user";
 import { Helmet } from "react-helmet";
 import { useUrlQueryParam } from "utils/url";
-import { useProjectsSearchParams } from "./util";
-import { Row } from "component/lib";
+import { useProjectModal, useProjectsSearchParams } from "./util";
+import { ButtonNoPadding, Row } from "component/lib";
 
 const apiUrl = process.env.REACT_APP_API_URL;
 
-export const ProjectListScreen = (props: { projectButton: JSX.Element }) => {
+export const ProjectListScreen = () => {
+  const { open } = useProjectModal();
   useDocumentTitle("项目列表", false);
   // 基本类型，可以放到依赖里面，组件状态，可以放到依赖里面，非组件状态，绝对不能放在依赖里面
   // const [param, setParam] = useProjectsSearchParams();
@@ -37,7 +38,9 @@ export const ProjectListScreen = (props: { projectButton: JSX.Element }) => {
     <Container>
       <Row between={true}>
         <h1>项目列表</h1>
-        {props.projectButton}
+        <ButtonNoPadding type="link" onClick={open}>
+          创建项目
+        </ButtonNoPadding>
       </Row>
 
       {/* 方案一 react-helmet */}
@@ -49,7 +52,11 @@ export const ProjectListScreen = (props: { projectButton: JSX.Element }) => {
         <Typography.Text type="danger">{error.message}</Typography.Text>
       ) : null}
       <List
-        projectButton={props.projectButton}
+        projectButton={
+          <ButtonNoPadding type="link" onClick={open}>
+            创建项目
+          </ButtonNoPadding>
+        }
         refresh={retry}
         users={users || []}
         loading={isLoading}
