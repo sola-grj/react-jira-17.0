@@ -14,7 +14,7 @@ import { useUsers } from "utils/user";
 import { Helmet } from "react-helmet";
 import { useUrlQueryParam } from "utils/url";
 import { useProjectModal, useProjectsSearchParams } from "./util";
-import { ButtonNoPadding, Row } from "component/lib";
+import { ButtonNoPadding, ErrorBox, Row } from "component/lib";
 
 const apiUrl = process.env.REACT_APP_API_URL;
 
@@ -26,12 +26,7 @@ export const ProjectListScreen = () => {
   // const [param, setParam] = useUrlQueryParam(["name", "personId"]);
   // const denounceParam = useDebounce(param, 200);
   const [param, setParam] = useProjectsSearchParams();
-  const {
-    isLoading,
-    error,
-    data: list,
-    retry,
-  } = useProject(useDebounce(param, 200));
+  const { isLoading, error, data: list } = useProject(useDebounce(param, 200));
   const { data: users } = useUsers();
 
   return (
@@ -39,7 +34,7 @@ export const ProjectListScreen = () => {
       <Row between={true}>
         <h1>项目列表</h1>
         <ButtonNoPadding type="link" onClick={open}>
-          创建项目
+          创建项目1
         </ButtonNoPadding>
       </Row>
 
@@ -48,16 +43,13 @@ export const ProjectListScreen = () => {
         <title>项目列表</title>
       </Helmet> */}
       <SearchPannel users={users || []} param={param} setParam={setParam} />
-      {error ? (
-        <Typography.Text type="danger">{error.message}</Typography.Text>
-      ) : null}
+      <ErrorBox error={error} />
       <List
         projectButton={
           <ButtonNoPadding type="link" onClick={open}>
             创建项目
           </ButtonNoPadding>
         }
-        refresh={retry}
         users={users || []}
         loading={isLoading}
         dataSource={list || []}

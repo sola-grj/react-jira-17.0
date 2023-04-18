@@ -19,23 +19,26 @@ export interface Project {
 interface ListProps extends TableProps<Project> {
   // list: Project[];
   users: User[];
-  refresh?: () => void;
   projectButton: JSX.Element;
 }
 export const List = ({ users, ...props }: ListProps) => {
-  const { open } = useProjectModal();
+  const { open, startEdit } = useProjectModal();
   const { mutate } = useEditProject();
   // 函数式编程之 柯里化 优先知道了id，后续传入才知道的pin参数
-  const pinProject = (id: number) => (pin: boolean) =>
-    mutate({ id, pin }).then(props.refresh);
+  const pinProject = (id: number) => (pin: boolean) => mutate({ id, pin });
+  const editProject = (id: number) => () => startEdit(id);
   const items = [
+    {
+      label: <ButtonNoPadding type="link">编辑</ButtonNoPadding>,
+      key: "edit",
+    },
     {
       label: (
         <ButtonNoPadding type="link" onClick={open}>
-          创建项目
+          删除
         </ButtonNoPadding>
       ),
-      key: "item-1",
+      key: "delete",
     }, // 菜单项务必填写 key
   ];
 
@@ -94,7 +97,16 @@ export const List = ({ users, ...props }: ListProps) => {
         {
           render(value, project) {
             return (
-              <Dropdown menu={{ items }}>
+              <Dropdown
+                overlay={
+                  <Menu>
+                    <Menu.Item onClick={editProject(project.id)} key={"edit"}>
+                      编辑
+                    </Menu.Item>
+                    <Menu.Item key={"delete"}>删除</Menu.Item>
+                  </Menu>
+                }
+              >
                 <ButtonNoPadding type="link">...</ButtonNoPadding>
               </Dropdown>
             );

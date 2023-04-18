@@ -15,6 +15,8 @@ export const useUrlQueryParam = <K extends string>(keys: K[]) => {
       [searchParams]
     ),
     (params: Partial<{ [key in K]: unknown }>) => {
+      console.log("===========", searchParams);
+
       const o = cleanObject({
         ...Object.fromEntries(searchParams),
         ...params,
