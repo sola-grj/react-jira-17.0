@@ -24,9 +24,8 @@ export const ProjectModal = () => {
 
   const onFinish = (values: any) => {
     mutateAsync({ ...editingProject, ...values }).then(() => {
-      debugger;
       form.resetFields();
-      close(editingProject);
+      close();
     });
   };
 
@@ -34,12 +33,7 @@ export const ProjectModal = () => {
     form.setFieldsValue(editingProject);
   }, [editingProject, form]);
   return (
-    <Drawer
-      forceRender
-      onClose={() => close(editingProject)}
-      open={projectModalOpen}
-      width={"100%"}
-    >
+    <Drawer forceRender onClose={close} open={projectModalOpen} width={"100%"}>
       {isLoading ? (
         <Spin size="large" />
       ) : (
