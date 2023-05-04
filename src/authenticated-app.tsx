@@ -89,7 +89,7 @@ const Container = styled.div`
   /* 左 20rem 中 自适应 右 20rem */
   /* grid-template-columns: 20rem 1fr 20rem; */
   /* 上 6rem 中 自适应 下 6rem */
-  grid-template-rows: 6rem 1fr 6rem;
+  grid-template-rows: 6rem 1fr;
   /* gird布局排列样式 */
   /* grid-template-areas:
     "header header header"
@@ -109,4 +109,6 @@ const HeaderLeft = styled(Row)``;
 const HeaderRight = styled.div``;
 const Main = styled.main`
   /* grid-area: main; */
+  display: flex;
+  overflow: hidden;
 `;
