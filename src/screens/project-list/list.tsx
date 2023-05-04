@@ -6,16 +6,9 @@ import { title } from "process";
 import React from "react";
 import { Link } from "react-router-dom";
 import { useDeleteProject, useEditProject } from "utils/project";
-import { User } from "./search-pannel";
+import { Project } from "../../types/Project";
+import { User } from "../../types/User";
 import { useProjectModal, useProjectsQueryKey } from "./util";
-export interface Project {
-  id: number;
-  name: string;
-  personId: number;
-  pin: boolean;
-  organization: string;
-  created: number;
-}
 interface ListProps extends TableProps<Project> {
   // list: Project[];
   users: User[];

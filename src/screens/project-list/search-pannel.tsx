@@ -5,17 +5,8 @@ import { Form, Input, Select } from "antd";
 import { UserSelect } from "component/user-select";
 import React from "react";
 import { useEffect, useState } from "react";
-import { Project } from "./list";
-
-export interface User {
-  [x: string]: any;
-  id: number;
-  name: string;
-  email: string;
-  title: string;
-  orgnization: string;
-  token: string;
-}
+import { Project } from "../../types/Project";
+import { User } from "../../types/User";
 
 interface SearchPannelProps {
   users: User[];

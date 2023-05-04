@@ -8,7 +8,7 @@ import { useHttp } from "utils/http";
 import styled from "@emotion/styled";
 import { Button, Typography } from "antd";
 import { useAsync } from "utils/use-async";
-import { Project } from "screens/project-list/list";
+import { Project } from "types/Project";
 import { useProject } from "utils/project";
 import { useUsers } from "utils/user";
 import { Helmet } from "react-helmet";

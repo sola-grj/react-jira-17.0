@@ -57,6 +57,7 @@
   },
   "devDependencies": {
     "@craco/types": "^7.0.0",
+    "@parcel/transformer-svg-react": "^2.8.3",
     "@types/qs": "^6.9.7",
     "@types/react-helmet": "^6.1.6"
   },
