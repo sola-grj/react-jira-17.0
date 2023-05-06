@@ -42,7 +42,7 @@ type DropChildProps = Partial<
 export const DropChild = React.forwardRef<HTMLDivElement, DropChildProps>(
   ({ children, ...props }, ref) => {
     return (
-      <div style={{}} className="hello-world" ref={ref}>
+      <div style={{ minHeight: "5px" }} className="hello-world" ref={ref}>
         {children}
         {props.provided?.placeholder}
       </div>

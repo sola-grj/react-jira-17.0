@@ -11,6 +11,7 @@ import { ProjectScreen } from "screens/project";
 import { resetRoute } from "utils";
 import { ProjectModal } from "screens/project-list/project-modal";
 import { ProjectPopover } from "screens/project-list/project-popover";
+import { UserPopover } from "component/user-popover";
 
 /*
  grid和flex各自应用场景
@@ -55,7 +56,7 @@ const PageHeader = () => {
           <SoftWareLogo width={"18rem"} color={"rgb(38,132,255)"} />
         </ButtonNoPadding>
         <ProjectPopover />
-        <span>用户</span>
+        <UserPopover />
       </HeaderLeft>
       <HeaderRight>
         <User />
@@ -98,6 +99,7 @@ const Container = styled.div`
   height: 100vh;
   /* gird之间的间距 */
   /* grid-gap: 10rem; */
+  overflow: hidden;
 `;
 const Header = styled(Row)`
   /* grid-area: header; */
@@ -109,6 +111,6 @@ const HeaderLeft = styled(Row)``;
 const HeaderRight = styled.div``;
 const Main = styled.main`
   /* grid-area: main; */
-  display: flex;
-  overflow: hidden;
+  /* display: flex; */
+  /* overflow: hidden; */
 `;

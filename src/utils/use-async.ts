@@ -76,7 +76,6 @@ export const useAsync = <D>(
           return data;
         })
         .catch((error) => {
-          debugger;
           // catch会消化异常，如果不主动抛出，外面是接受不到异常的
           setError(error);
           if (config.throwOnError) {

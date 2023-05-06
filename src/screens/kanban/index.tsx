@@ -41,10 +41,10 @@ export const KanbanScreen = () => {
           <Drop type="COLUMN" direction="horizontal" droppableId="kanban">
             <ColumnsContainer>
               {kanbans?.map((kanban, index) => (
-                <DropChild>
+                <DropChild className="xxxxxxxx" style={{ minHeight: "5px" }}>
                   <Drag
                     key={kanban.id}
-                    draggableId={"kanban" + kanban.id}
+                    draggableId={"kanban66" + kanban.id}
                     index={index}
                   >
                     <KanbanColumn kanban={kanban} key={kanban.id} />
@@ -82,7 +82,6 @@ export const useDragEnd = () => {
         reorderKanban({ fromId, referenceId: toId, type });
       }
       if (type === "ROW") {
-        debugger;
         const fromKanbanId = +source.droppableId;
         const toKanbanId = +destination.droppableId;
         // if (fromKanbanId !== toKanbanId) {
@@ -114,6 +113,7 @@ export const useDragEnd = () => {
 };
 
 export const ColumnsContainer = styled.div`
+  height: 700px;
   display: flex;
   overflow-x: scroll;
   /* margin-right: 2rem; */
